@@ -1,0 +1,132 @@
+/* ===== Todo Container ===== */
+
+.todo-container {
+    width: 420px;
+    margin: 60px auto;
+    background: linear-gradient(135deg, #1e1e2e, #2a2a3e);
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 8px 32px rgba(100, 108, 255, 0.25);
+    border: 1px solid rgba(100, 108, 255, 0.2);
+}
+
+
+/* ===== Title ===== */
+
+.todo-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 24px;
+    background: linear-gradient(90deg, #a78bfa, #60a5fa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 1px;
+}
+
+
+/* ===== Input row ===== */
+
+.todo-new {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 24px;
+}
+
+.todo-new input[type="text"] {
+    flex: 1;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1.5px solid rgba(167, 139, 250, 0.4);
+    background: rgba(255, 255, 255, 0.05);
+    color: #e2e8f0;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.25s;
+}
+
+.todo-new input[type="text"]:focus {
+    border-color: #a78bfa;
+    background: rgba(167, 139, 250, 0.08);
+}
+
+.todo-new input[type="text"]::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+
+/* ===== Add button ===== */
+
+.todo-add {
+    padding: 10px 18px;
+    border-radius: 10px;
+    border: none;
+    background: linear-gradient(135deg, #a78bfa, #60a5fa);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.15s;
+    white-space: nowrap;
+}
+
+.todo-add:hover {
+    opacity: 0.88;
+    transform: translateY(-1px);
+}
+
+.todo-add:active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+
+/* ===== Todo items ===== */
+
+.todo-data {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.todo-item {
+    padding: 12px 16px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-left: 4px solid #a78bfa;
+    color: #cbd5e1;
+    font-size: 0.95rem;
+    transition: background 0.2s, transform 0.15s;
+    cursor: default;
+}
+
+.todo-item:hover {
+    background: rgba(167, 139, 250, 0.12);
+    transform: translateX(4px);
+}
+
+
+/* ===== React Logo ===== */
+
+.todo-image {
+    display: flex;
+    justify-content: center;
+    margin-top: 28px;
+}
+
+.todo-image .logo {
+    width: 64px;
+    height: 64px;
+    filter: drop-shadow(0 0 10px #60a5fa88);
+    animation: spin 8s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

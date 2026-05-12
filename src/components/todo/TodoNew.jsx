@@ -2,13 +2,13 @@ import { useState } from "react";
 
 const TodoNew = (props) => {
 
-    const [inputValue, setInputValue] = useState("Bin")
+    const [inputValue, setInputValue] = useState("")
 
     const { addTodo } = props
 
-    // addTodo("Nhật Tiến")
     const handleClick = () => {
         addTodo(inputValue)
+        setInputValue("")
     }
 
     const handleOnChange = (name) => {
@@ -16,7 +16,7 @@ const TodoNew = (props) => {
     }
     return (
         <div className="todo-new" >
-            <input type="text" onChange={(event) => handleOnChange(event.target.value)} />
+            <input type="text" onChange={(event) => handleOnChange(event.target.value)} value={inputValue} />
             <button className="todo-add" onClick={handleClick}>Add</button>
         </div >
     )

@@ -1,6 +1,6 @@
 import axios from "./axios.customize";
 
-export const createUserAPI = (fullNameInput, emailInput, passwordInput, phoneNumberInput) => {
+const createUserAPI = (fullNameInput, emailInput, passwordInput, phoneNumberInput) => {
     const URL = "/api/v1/user";
     const data = {
         fullName: fullNameInput,
@@ -10,3 +10,10 @@ export const createUserAPI = (fullNameInput, emailInput, passwordInput, phoneNum
     }
     return axios.post(URL, data);
 }
+
+const fetchAllUserAPI = () => {
+    const URL = "/api/v1/user";
+    return axios.get(URL);
+}
+
+export { createUserAPI, fetchAllUserAPI }

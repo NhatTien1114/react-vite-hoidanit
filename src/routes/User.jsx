@@ -1,4 +1,3 @@
-import { Button, Input } from "antd";
 import UserTable from "../components/users/user.table";
 import UserForm from "../components/users/user.form";
 import { useEffect, useState } from "react";
@@ -18,7 +17,7 @@ const UserPage = () => {
     return (
         <div>
             <UserForm loadUser={loadUser} />
-            <UserTable dataUsers={dataUsers} />
+            <UserTable dataUsers={dataUsers} loadUser={loadUser} />
         </div>
     )
 }

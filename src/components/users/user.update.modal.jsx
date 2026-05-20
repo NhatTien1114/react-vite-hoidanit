@@ -1,12 +1,13 @@
-import { Input, Modal } from "antd";
+import { Input, Modal, notification } from "antd";
 import { useEffect, useState } from "react";
+import { updateUserAPI } from "../../services/axios.service";
 
 const UserUpdateModal = (props) => {
     const [idInput, setIdInput] = useState("");
     const [fullNameInput, setFullNameInput] = useState("");
     const [phoneNumberInput, setPhoneNumberInput] = useState("");
 
-    const { isUpdateModalOpen, setIsUpdateModalOpen, userUpdate, setUserUpdate } = props;
+    const { isUpdateModalOpen, setIsUpdateModalOpen, userUpdate, setUserUpdate, loadUser } = props;
 
     useEffect(() => {
         if (userUpdate) {
@@ -18,7 +19,7 @@ const UserUpdateModal = (props) => {
     }, [userUpdate])
 
     const handleDataForm = async () => {
-        const res = await createUserAPI(fullNameInput, emailInput, passwordInput, phoneNumberInput);
+        const res = await updateUserAPI(idInput, fullNameInput, phoneNumberInput);
         if (res.data) {
             notification.success({
                 message: "Update user successfully",
@@ -35,7 +36,7 @@ const UserUpdateModal = (props) => {
     }
 
     const loadDataAndCloseModal = () => {
-        setIsModalOpen(false);
+        setIsUpdateModalOpen(false);
         setIdInput("");
         setFullNameInput("");
         setPhoneNumberInput("");

@@ -55,4 +55,15 @@ const updateAvatarFileAPI = (avatar, _id, fullNameInput, phoneNumberInput) => {
     return axios.put(URL, data);
 }
 
-export { createUserAPI, updateUserAPI, deleteUserAPI, fetchAllUserAPI, handleUploadFileAPI, updateAvatarFileAPI }
+const registerUserAPI = (fullNameInput, emailInput, passwordInput, phoneNumberInput) => {
+    const URL = "/api/v1/user/register";
+    const data = {
+        fullName: fullNameInput,
+        email: emailInput,
+        password: passwordInput,
+        phone: phoneNumberInput
+    }
+    return axios.post(URL, data);
+}
+
+export { createUserAPI, updateUserAPI, deleteUserAPI, fetchAllUserAPI, handleUploadFileAPI, updateAvatarFileAPI, registerUserAPI }

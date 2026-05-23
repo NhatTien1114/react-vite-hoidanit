@@ -26,8 +26,8 @@ const deleteUserAPI = (_id) => {
     return axios.delete(URL);
 }
 
-const fetchAllUserAPI = () => {
-    const URL = "/api/v1/user";
+const fetchAllUserAPI = (current, pageSize) => {
+    const URL = `/api/v1/user?current=${current}&pageSize=${pageSize}`;
     return axios.get(URL);
 }
 

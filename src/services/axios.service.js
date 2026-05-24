@@ -66,4 +66,14 @@ const registerUserAPI = (fullNameInput, emailInput, passwordInput, phoneNumberIn
     return axios.post(URL, data);
 }
 
-export { createUserAPI, updateUserAPI, deleteUserAPI, fetchAllUserAPI, handleUploadFileAPI, updateAvatarFileAPI, registerUserAPI }
+const loginAPI = (email, password) => {
+    const URL = "/api/v1/auth/login";
+    const data = {
+        username: email,
+        password: password,
+        delay: 3000
+    };
+    return axios.post(URL, data);
+}
+
+export { createUserAPI, updateUserAPI, deleteUserAPI, fetchAllUserAPI, handleUploadFileAPI, updateAvatarFileAPI, registerUserAPI, loginAPI }

@@ -2,7 +2,8 @@ import { ArrowRightOutlined } from '@ant-design/icons';
 import { Button, Divider, Form, Input, message, notification, Row } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import { loginAPI } from '../services/axios.service';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { AuthContext } from '../components/context/auth.context';
 
 const pageStyle = {
     minHeight: '100vh',
@@ -50,11 +51,14 @@ const LoginPage = () => {
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const { setUser } = useContext(AuthContext);
     const onFinish = async (values) => {
         setLoading(true);
         const res = await loginAPI(values.email, values.password);
         if (res.data) {
             message.success("Login success");
+            localStorage.setItem("access_token", res.data.access_token);
+            setUser(res.data.user);
             navigate("/");
         } else {
             notification.error({
@@ -74,7 +78,6 @@ const LoginPage = () => {
                     name="basic"
                     layout="vertical"
                     onFinish={onFinish}
-                // onFinishFailed={onFinishFailed}
                 >
                     <Form.Item
                         label="Email"
@@ -94,6 +97,11 @@ const LoginPage = () => {
                         rules={[{ required: true, message: 'Please input your password!' }]}
                     >
                         <Input.Password
+                            onKeyDown={(event) => {
+                                if (event.key === "Enter") {
+                                    form.submit();
+                                }
+                            }}
                             size="large"
                             placeholder="Nhập mật khẩu"
                             style={{ borderRadius: '8px' }}

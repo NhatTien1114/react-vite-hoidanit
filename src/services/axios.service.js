@@ -81,4 +81,20 @@ const getAccountAPI = () => {
     return axios.get(URL);
 }
 
-export { createUserAPI, updateUserAPI, deleteUserAPI, fetchAllUserAPI, handleUploadFileAPI, updateAvatarFileAPI, registerUserAPI, loginAPI, getAccountAPI }
+const logoutAPI = () => {
+    const URL = "/api/v1/auth/logout";
+    return axios.post(URL);
+}
+
+export {
+    createUserAPI,
+    updateUserAPI,
+    deleteUserAPI,
+    fetchAllUserAPI,
+    handleUploadFileAPI,
+    updateAvatarFileAPI,
+    registerUserAPI,
+    loginAPI,
+    getAccountAPI,
+    logoutAPI
+}

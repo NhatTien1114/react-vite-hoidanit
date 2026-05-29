@@ -1,16 +1,34 @@
-import { Link } from "react-router-dom";
-import { Menu } from "antd";
+import { Link, useNavigate } from "react-router-dom";
+import { Menu, message } from "antd";
 import { useContext, useState } from "react";
 import { HomeOutlined, UserOutlined, BookOutlined, LoginOutlined, AliwangwangOutlined } from '@ant-design/icons';
 import { AuthContext } from "../context/auth.context";
+import { logoutAPI } from "../../services/axios.service";
 const Header = () => {
 
     const [current, setCurrent] = useState('');
-
-    const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const { user, setUser } = useContext(AuthContext);
     const onClick = e => {
         setCurrent(e.key);
     };
+
+    const handleLogout = async () => {
+        const res = await logoutAPI();
+        if (res.data) {
+            localStorage.clear("access_token");
+            setUser({
+                email: "",
+                phone: "",
+                fullName: "",
+                role: "",
+                avatar: "",
+                id: "",
+            })
+            message.success("Logout success");
+        }
+        navigate("/");
+    }
 
     const items = [
         {
@@ -41,7 +59,7 @@ const Header = () => {
                 icon: <AliwangwangOutlined />,
                 children: [
                     {
-                        label: "Đăng xuất",
+                        label: <span onClick={() => handleLogout()}>Logout</span>,
                         key: "logout"
                     },
                 ],

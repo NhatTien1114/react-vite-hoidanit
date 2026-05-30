@@ -7,12 +7,12 @@ import {
 import LoginPage from './routes/Login.jsx';
 import RegisterPage from './routes/Register.jsx';
 import UserPage from './routes/User.jsx';
-import BookPage from './routes/Books.jsx';
 import "./styles/global.css";
 import TodoApp from './components/todo/TodoApp.jsx';
 import ErrorPage from './routes/Error.jsx';
 import { AuthWrapper } from './components/context/auth.context.jsx';
 import PrivateRoute from './routes/private.route.jsx';
+import Book from './routes/Book.jsx';
 
 const router = createBrowserRouter([
   {
@@ -32,7 +32,7 @@ const router = createBrowserRouter([
         path: "/books",
         element: (
           <PrivateRoute>
-            <BookPage />
+            <Book />
           </PrivateRoute>
         ),
       },

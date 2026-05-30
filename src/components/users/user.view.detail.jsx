@@ -66,7 +66,6 @@ const UserViewDetail = (props) => {
                 setUserView(null);
             }}
             open={isViewModalOpen}
-            mask={false}
         >
             {userView ? <>
                 <p>ID: <b>{userView._id}</b></p>

@@ -1,13 +1,35 @@
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { Space, Table } from "antd";
+import { notification, Popconfirm, Space, Table } from "antd";
 import { useState } from "react";
 import BookDetail from "./book.view.detail";
+// import BookUpdate from "./book.update.modal";
+import BookUpdateUncontroll from "./book.update.uncontroll";
+import { deleteBookAPI } from "../../services/axios.service";
 
 const BookTable = (props) => {
-    const { books, current, setCurrent, pageSize, setPageSize, total } = props
+    const { books, current, setCurrent, pageSize, setPageSize, total, getAllBooks } = props
 
     const [bookDetail, setBookDetail] = useState(null);
     const [isOpenDrawer, setIsOpenDrawer] = useState(false);
+
+    const [isOpenUpdate, setIsOpenUpdate] = useState(false);
+    const [bookUpdate, setBookUpdate] = useState(null);
+
+    // eslint-disable-next-line no-unused-vars
+    const [isOpenDelete, setIsOpenDelete] = useState(false);
+    // eslint-disable-next-line no-unused-vars
+    const [bookDelete, setBookDelete] = useState(null);
+
+    const handleDelteBook = async (id) => {
+        setIsOpenDelete(false);
+        setBookDelete(null);
+        await deleteBookAPI(id);
+        notification.success({
+            message: "Delete book successfully",
+            description: "Xóa sách thành công"
+        })
+        await getAllBooks();
+    }
     const columns = [
         {
             title: 'STT',
@@ -62,10 +84,29 @@ const BookTable = (props) => {
                     <Space size="middle">
                         <div style={{ display: 'flex', gap: '20px' }}>
                             <EditOutlined style={{ color: 'orange' }} onClick={() => {
-                                { record }
+                                {
+                                    setIsOpenUpdate(true)
+                                    setBookUpdate(record)
+                                }
                             }} />
+                            <Popconfirm
+                                title="Delete the book"
+                                description="Are you sure to delete this book?"
+                                onConfirm={() => {
+                                    handleDelteBook(record._id)
+                                }}
+                                onCancel={() => {
+                                    setIsOpenDelete(false);
+                                    setBookDelete(null);
+                                }}
+                                okText="Yes"
+                                cancelText="No"
+                            >
+                                <DeleteOutlined style={{ color: 'red' }}
 
-                            <DeleteOutlined style={{ color: 'red' }} />
+                                />
+                            </Popconfirm>
+
 
                         </div>
                     </Space>
@@ -106,6 +147,20 @@ const BookTable = (props) => {
                 isOpenDrawer={isOpenDrawer}
                 setBookDetail={setBookDetail}
                 setIsOpenDrawer={setIsOpenDrawer}
+            />
+            {/* <BookUpdate
+                isOpenUpdate={isOpenUpdate}
+                setIsOpenUpdate={setIsOpenUpdate}
+                bookUpdate={bookUpdate}
+                setBookUpdate={setBookUpdate}
+                getAllBooks={getAllBooks}
+            /> */}
+            <BookUpdateUncontroll
+                isOpenUpdate={isOpenUpdate}
+                setIsOpenUpdate={setIsOpenUpdate}
+                bookUpdate={bookUpdate}
+                setBookUpdate={setBookUpdate}
+                getAllBooks={getAllBooks}
             />
         </>
     )

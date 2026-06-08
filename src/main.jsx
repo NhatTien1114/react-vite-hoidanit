@@ -13,6 +13,9 @@ import ErrorPage from './routes/Error.jsx';
 import { AuthWrapper } from './components/context/auth.context.jsx';
 import PrivateRoute from './routes/private.route.jsx';
 import Book from './routes/Book.jsx';
+import 'nprogress/nprogress.css';
+
+
 
 const router = createBrowserRouter([
   {

@@ -9,6 +9,7 @@ const BookUpdateUncontroll = (props) => {
 
     const [thumbnail, setThumbnail] = useState(null);
     const [preview, setPreview] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         if (bookUpdate) {
@@ -39,6 +40,7 @@ const BookUpdateUncontroll = (props) => {
     }
 
     const updateBook = async (newThumbnail, values) => {
+        setLoading(true);
         const { id, mainText, author, price, quantity, category } = values;
         const res = await updateBookAPI(
             id,
@@ -62,6 +64,7 @@ const BookUpdateUncontroll = (props) => {
                 description: JSON.stringify(res.message)
             });
         }
+        setLoading(false);
     }
 
     const handleUpdateBook = async (values) => {
@@ -104,6 +107,7 @@ const BookUpdateUncontroll = (props) => {
                 title="Update Book"
                 open={isOpenUpdate}
                 onOk={() => form.submit()}
+                okButtonProps={{ loading: loading }}
                 onCancel={() => closeModal()}
                 okText={"Update"}
             >

@@ -1,6 +1,6 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, message } from "antd";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { HomeOutlined, UserOutlined, BookOutlined, LoginOutlined, AliwangwangOutlined } from '@ant-design/icons';
 import { AuthContext } from "../context/auth.context";
 import { logoutAPI } from "../../services/axios.service";
@@ -12,6 +12,20 @@ const Header = () => {
     const onClick = e => {
         setCurrent(e.key);
     };
+
+    const location = useLocation();
+
+    useEffect(() => {
+        if (location && location.pathname) {
+            const path = ["users", "books"];
+            const pathName = path.find(item => `/${item}` === location.pathname);
+            if (pathName) {
+                setCurrent(pathName);
+            } else {
+                setCurrent("home");
+            }
+        }
+    }, [location])
 
     const handleLogout = async () => {
         const res = await logoutAPI();

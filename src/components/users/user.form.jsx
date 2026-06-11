@@ -1,8 +1,10 @@
-import { Button, Input, Modal, notification } from "antd";
+import { App, Button, Input, Modal } from "antd";
 import { useState } from "react";
 import { createUserAPI } from "../../services/axios.service";
 
 const UserForm = (props) => {
+    const { notification } = App.useApp();
+
     const [fullNameInput, setFullNameInput] = useState("");
     const [emailInput, setEmailInput] = useState("");
     const [passwordInput, setPasswordInput] = useState("");

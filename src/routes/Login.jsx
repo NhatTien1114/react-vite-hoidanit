@@ -1,5 +1,5 @@
 import { ArrowRightOutlined } from '@ant-design/icons';
-import { Button, Divider, Form, Input, message, notification, Row } from 'antd';
+import { App, Button, Divider, Form, Input, Row } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import { loginAPI } from '../services/axios.service';
 import { useContext, useState } from 'react';
@@ -48,6 +48,7 @@ const buttonStyle = {
 };
 
 const LoginPage = () => {
+    const { message, notification } = App.useApp();
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();

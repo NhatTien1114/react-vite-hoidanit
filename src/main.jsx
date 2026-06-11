@@ -1,5 +1,6 @@
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
+import { App as AppAntd } from 'antd';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -20,7 +21,7 @@ import 'nprogress/nprogress.css';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <AppAntd> <App /> </AppAntd>,
     errorElement: <ErrorPage />,
     children: [
       {
@@ -43,7 +44,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <LoginPage />,
+    element: <AppAntd> <LoginPage /></AppAntd>,
   },
   {
     path: "/register",
